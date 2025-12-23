@@ -1,0 +1,602 @@
+{
+  "0": {
+    "fine_label": "apple",
+    "fine_label_id": 0,
+    "coarse_label": "fruit_and_vegetables",
+    "coarse_label_id": 4
+  },
+  "1": {
+    "fine_label": "aquarium_fish",
+    "fine_label_id": 1,
+    "coarse_label": "fish",
+    "coarse_label_id": 1
+  },
+  "2": {
+    "fine_label": "baby",
+    "fine_label_id": 2,
+    "coarse_label": "people",
+    "coarse_label_id": 14
+  },
+  "3": {
+    "fine_label": "bear",
+    "fine_label_id": 3,
+    "coarse_label": "large_carnivores",
+    "coarse_label_id": 8
+  },
+  "4": {
+    "fine_label": "beaver",
+    "fine_label_id": 4,
+    "coarse_label": "aquatic_mammals",
+    "coarse_label_id": 0
+  },
+  "5": {
+    "fine_label": "bed",
+    "fine_label_id": 5,
+    "coarse_label": "household_furniture",
+    "coarse_label_id": 6
+  },
+  "6": {
+    "fine_label": "bee",
+    "fine_label_id": 6,
+    "coarse_label": "insects",
+    "coarse_label_id": 7
+  },
+  "7": {
+    "fine_label": "beetle",
+    "fine_label_id": 7,
+    "coarse_label": "insects",
+    "coarse_label_id": 7
+  },
+  "8": {
+    "fine_label": "bicycle",
+    "fine_label_id": 8,
+    "coarse_label": "vehicles_1",
+    "coarse_label_id": 18
+  },
+  "9": {
+    "fine_label": "bottle",
+    "fine_label_id": 9,
+    "coarse_label": "food_containers",
+    "coarse_label_id": 3
+  },
+  "10": {
+    "fine_label": "bowl",
+    "fine_label_id": 10,
+    "coarse_label": "food_containers",
+    "coarse_label_id": 3
+  },
+  "11": {
+    "fine_label": "boy",
+    "fine_label_id": 11,
+    "coarse_label": "people",
+    "coarse_label_id": 14
+  },
+  "12": {
+    "fine_label": "bridge",
+    "fine_label_id": 12,
+    "coarse_label": "large_man-made_outdoor_things",
+    "coarse_label_id": 9
+  },
+  "13": {
+    "fine_label": "bus",
+    "fine_label_id": 13,
+    "coarse_label": "vehicles_1",
+    "coarse_label_id": 18
+  },
+  "14": {
+    "fine_label": "butterfly",
+    "fine_label_id": 14,
+    "coarse_label": "insects",
+    "coarse_label_id": 7
+  },
+  "15": {
+    "fine_label": "camel",
+    "fine_label_id": 15,
+    "coarse_label": "large_omnivores_and_herbivores",
+    "coarse_label_id": 11
+  },
+  "16": {
+    "fine_label": "can",
+    "fine_label_id": 16,
+    "coarse_label": "food_containers",
+    "coarse_label_id": 3
+  },
+  "17": {
+    "fine_label": "castle",
+    "fine_label_id": 17,
+    "coarse_label": "large_man-made_outdoor_things",
+    "coarse_label_id": 9
+  },
+  "18": {
+    "fine_label": "caterpillar",
+    "fine_label_id": 18,
+    "coarse_label": "insects",
+    "coarse_label_id": 7
+  },
+  "19": {
+    "fine_label": "cattle",
+    "fine_label_id": 19,
+    "coarse_label": "large_omnivores_and_herbivores",
+    "coarse_label_id": 11
+  },
+  "20": {
+    "fine_label": "chair",
+    "fine_label_id": 20,
+    "coarse_label": "household_furniture",
+    "coarse_label_id": 6
+  },
+  "21": {
+    "fine_label": "chimpanzee",
+    "fine_label_id": 21,
+    "coarse_label": "large_omnivores_and_herbivores",
+    "coarse_label_id": 11
+  },
+  "22": {
+    "fine_label": "clock",
+    "fine_label_id": 22,
+    "coarse_label": "household_electrical_devices",
+    "coarse_label_id": 5
+  },
+  "23": {
+    "fine_label": "cloud",
+    "fine_label_id": 23,
+    "coarse_label": "large_natural_outdoor_scenes",
+    "coarse_label_id": 10
+  },
+  "24": {
+    "fine_label": "cockroach",
+    "fine_label_id": 24,
+    "coarse_label": "insects",
+    "coarse_label_id": 7
+  },
+  "25": {
+    "fine_label": "couch",
+    "fine_label_id": 25,
+    "coarse_label": "household_furniture",
+    "coarse_label_id": 6
+  },
+  "26": {
+    "fine_label": "crab",
+    "fine_label_id": 26,
+    "coarse_label": "non-insect_invertebrates",
+    "coarse_label_id": 13
+  },
+  "27": {
+    "fine_label": "crocodile",
+    "fine_label_id": 27,
+    "coarse_label": "reptiles",
+    "coarse_label_id": 15
+  },
+  "28": {
+    "fine_label": "cup",
+    "fine_label_id": 28,
+    "coarse_label": "food_containers",
+    "coarse_label_id": 3
+  },
+  "29": {
+    "fine_label": "dinosaur",
+    "fine_label_id": 29,
+    "coarse_label": "reptiles",
+    "coarse_label_id": 15
+  },
+  "30": {
+    "fine_label": "dolphin",
+    "fine_label_id": 30,
+    "coarse_label": "aquatic_mammals",
+    "coarse_label_id": 0
+  },
+  "31": {
+    "fine_label": "elephant",
+    "fine_label_id": 31,
+    "coarse_label": "large_omnivores_and_herbivores",
+    "coarse_label_id": 11
+  },
+  "32": {
+    "fine_label": "flatfish",
+    "fine_label_id": 32,
+    "coarse_label": "fish",
+    "coarse_label_id": 1
+  },
+  "33": {
+    "fine_label": "forest",
+    "fine_label_id": 33,
+    "coarse_label": "large_natural_outdoor_scenes",
+    "coarse_label_id": 10
+  },
+  "34": {
+    "fine_label": "fox",
+    "fine_label_id": 34,
+    "coarse_label": "medium_mammals",
+    "coarse_label_id": 12
+  },
+  "35": {
+    "fine_label": "girl",
+    "fine_label_id": 35,
+    "coarse_label": "people",
+    "coarse_label_id": 14
+  },
+  "36": {
+    "fine_label": "hamster",
+    "fine_label_id": 36,
+    "coarse_label": "small_mammals",
+    "coarse_label_id": 16
+  },
+  "37": {
+    "fine_label": "house",
+    "fine_label_id": 37,
+    "coarse_label": "large_man-made_outdoor_things",
+    "coarse_label_id": 9
+  },
+  "38": {
+    "fine_label": "kangaroo",
+    "fine_label_id": 38,
+    "coarse_label": "large_omnivores_and_herbivores",
+    "coarse_label_id": 11
+  },
+  "39": {
+    "fine_label": "keyboard",
+    "fine_label_id": 39,
+    "coarse_label": "household_electrical_devices",
+    "coarse_label_id": 5
+  },
+  "40": {
+    "fine_label": "lamp",
+    "fine_label_id": 40,
+    "coarse_label": "household_electrical_devices",
+    "coarse_label_id": 5
+  },
+  "41": {
+    "fine_label": "lawn_mower",
+    "fine_label_id": 41,
+    "coarse_label": "vehicles_2",
+    "coarse_label_id": 19
+  },
+  "42": {
+    "fine_label": "leopard",
+    "fine_label_id": 42,
+    "coarse_label": "large_carnivores",
+    "coarse_label_id": 8
+  },
+  "43": {
+    "fine_label": "lion",
+    "fine_label_id": 43,
+    "coarse_label": "large_carnivores",
+    "coarse_label_id": 8
+  },
+  "44": {
+    "fine_label": "lizard",
+    "fine_label_id": 44,
+    "coarse_label": "reptiles",
+    "coarse_label_id": 15
+  },
+  "45": {
+    "fine_label": "lobster",
+    "fine_label_id": 45,
+    "coarse_label": "non-insect_invertebrates",
+    "coarse_label_id": 13
+  },
+  "46": {
+    "fine_label": "man",
+    "fine_label_id": 46,
+    "coarse_label": "people",
+    "coarse_label_id": 14
+  },
+  "47": {
+    "fine_label": "maple_tree",
+    "fine_label_id": 47,
+    "coarse_label": "trees",
+    "coarse_label_id": 17
+  },
+  "48": {
+    "fine_label": "motorcycle",
+    "fine_label_id": 48,
+    "coarse_label": "vehicles_1",
+    "coarse_label_id": 18
+  },
+  "49": {
+    "fine_label": "mountain",
+    "fine_label_id": 49,
+    "coarse_label": "large_natural_outdoor_scenes",
+    "coarse_label_id": 10
+  },
+  "50": {
+    "fine_label": "mouse",
+    "fine_label_id": 50,
+    "coarse_label": "small_mammals",
+    "coarse_label_id": 16
+  },
+  "51": {
+    "fine_label": "mushroom",
+    "fine_label_id": 51,
+    "coarse_label": "fruit_and_vegetables",
+    "coarse_label_id": 4
+  },
+  "52": {
+    "fine_label": "oak_tree",
+    "fine_label_id": 52,
+    "coarse_label": "trees",
+    "coarse_label_id": 17
+  },
+  "53": {
+    "fine_label": "orange",
+    "fine_label_id": 53,
+    "coarse_label": "fruit_and_vegetables",
+    "coarse_label_id": 4
+  },
+  "54": {
+    "fine_label": "orchid",
+    "fine_label_id": 54,
+    "coarse_label": "flowers",
+    "coarse_label_id": 2
+  },
+  "55": {
+    "fine_label": "otter",
+    "fine_label_id": 55,
+    "coarse_label": "aquatic_mammals",
+    "coarse_label_id": 0
+  },
+  "56": {
+    "fine_label": "palm_tree",
+    "fine_label_id": 56,
+    "coarse_label": "trees",
+    "coarse_label_id": 17
+  },
+  "57": {
+    "fine_label": "pear",
+    "fine_label_id": 57,
+    "coarse_label": "fruit_and_vegetables",
+    "coarse_label_id": 4
+  },
+  "58": {
+    "fine_label": "pickup_truck",
+    "fine_label_id": 58,
+    "coarse_label": "vehicles_1",
+    "coarse_label_id": 18
+  },
+  "59": {
+    "fine_label": "pine_tree",
+    "fine_label_id": 59,
+    "coarse_label": "trees",
+    "coarse_label_id": 17
+  },
+  "60": {
+    "fine_label": "plain",
+    "fine_label_id": 60,
+    "coarse_label": "large_natural_outdoor_scenes",
+    "coarse_label_id": 10
+  },
+  "61": {
+    "fine_label": "plate",
+    "fine_label_id": 61,
+    "coarse_label": "food_containers",
+    "coarse_label_id": 3
+  },
+  "62": {
+    "fine_label": "poppy",
+    "fine_label_id": 62,
+    "coarse_label": "flowers",
+    "coarse_label_id": 2
+  },
+  "63": {
+    "fine_label": "porcupine",
+    "fine_label_id": 63,
+    "coarse_label": "medium_mammals",
+    "coarse_label_id": 12
+  },
+  "64": {
+    "fine_label": "possum",
+    "fine_label_id": 64,
+    "coarse_label": "medium_mammals",
+    "coarse_label_id": 12
+  },
+  "65": {
+    "fine_label": "rabbit",
+    "fine_label_id": 65,
+    "coarse_label": "small_mammals",
+    "coarse_label_id": 16
+  },
+  "66": {
+    "fine_label": "raccoon",
+    "fine_label_id": 66,
+    "coarse_label": "medium_mammals",
+    "coarse_label_id": 12
+  },
+  "67": {
+    "fine_label": "ray",
+    "fine_label_id": 67,
+    "coarse_label": "fish",
+    "coarse_label_id": 1
+  },
+  "68": {
+    "fine_label": "road",
+    "fine_label_id": 68,
+    "coarse_label": "large_man-made_outdoor_things",
+    "coarse_label_id": 9
+  },
+  "69": {
+    "fine_label": "rocket",
+    "fine_label_id": 69,
+    "coarse_label": "vehicles_2",
+    "coarse_label_id": 19
+  },
+  "70": {
+    "fine_label": "rose",
+    "fine_label_id": 70,
+    "coarse_label": "flowers",
+    "coarse_label_id": 2
+  },
+  "71": {
+    "fine_label": "sea",
+    "fine_label_id": 71,
+    "coarse_label": "large_natural_outdoor_scenes",
+    "coarse_label_id": 10
+  },
+  "72": {
+    "fine_label": "seal",
+    "fine_label_id": 72,
+    "coarse_label": "aquatic_mammals",
+    "coarse_label_id": 0
+  },
+  "73": {
+    "fine_label": "shark",
+    "fine_label_id": 73,
+    "coarse_label": "fish",
+    "coarse_label_id": 1
+  },
+  "74": {
+    "fine_label": "shrew",
+    "fine_label_id": 74,
+    "coarse_label": "small_mammals",
+    "coarse_label_id": 16
+  },
+  "75": {
+    "fine_label": "skunk",
+    "fine_label_id": 75,
+    "coarse_label": "medium_mammals",
+    "coarse_label_id": 12
+  },
+  "76": {
+    "fine_label": "skyscraper",
+    "fine_label_id": 76,
+    "coarse_label": "large_man-made_outdoor_things",
+    "coarse_label_id": 9
+  },
+  "77": {
+    "fine_label": "snail",
+    "fine_label_id": 77,
+    "coarse_label": "non-insect_invertebrates",
+    "coarse_label_id": 13
+  },
+  "78": {
+    "fine_label": "snake",
+    "fine_label_id": 78,
+    "coarse_label": "reptiles",
+    "coarse_label_id": 15
+  },
+  "79": {
+    "fine_label": "spider",
+    "fine_label_id": 79,
+    "coarse_label": "non-insect_invertebrates",
+    "coarse_label_id": 13
+  },
+  "80": {
+    "fine_label": "squirrel",
+    "fine_label_id": 80,
+    "coarse_label": "small_mammals",
+    "coarse_label_id": 16
+  },
+  "81": {
+    "fine_label": "streetcar",
+    "fine_label_id": 81,
+    "coarse_label": "vehicles_2",
+    "coarse_label_id": 19
+  },
+  "82": {
+    "fine_label": "sunflower",
+    "fine_label_id": 82,
+    "coarse_label": "flowers",
+    "coarse_label_id": 2
+  },
+  "83": {
+    "fine_label": "sweet_pepper",
+    "fine_label_id": 83,
+    "coarse_label": "fruit_and_vegetables",
+    "coarse_label_id": 4
+  },
+  "84": {
+    "fine_label": "table",
+    "fine_label_id": 84,
+    "coarse_label": "household_furniture",
+    "coarse_label_id": 6
+  },
+  "85": {
+    "fine_label": "tank",
+    "fine_label_id": 85,
+    "coarse_label": "vehicles_2",
+    "coarse_label_id": 19
+  },
+  "86": {
+    "fine_label": "telephone",
+    "fine_label_id": 86,
+    "coarse_label": "household_electrical_devices",
+    "coarse_label_id": 5
+  },
+  "87": {
+    "fine_label": "television",
+    "fine_label_id": 87,
+    "coarse_label": "household_electrical_devices",
+    "coarse_label_id": 5
+  },
+  "88": {
+    "fine_label": "tiger",
+    "fine_label_id": 88,
+    "coarse_label": "large_carnivores",
+    "coarse_label_id": 8
+  },
+  "89": {
+    "fine_label": "tractor",
+    "fine_label_id": 89,
+    "coarse_label": "vehicles_2",
+    "coarse_label_id": 19
+  },
+  "90": {
+    "fine_label": "train",
+    "fine_label_id": 90,
+    "coarse_label": "vehicles_1",
+    "coarse_label_id": 18
+  },
+  "91": {
+    "fine_label": "trout",
+    "fine_label_id": 91,
+    "coarse_label": "fish",
+    "coarse_label_id": 1
+  },
+  "92": {
+    "fine_label": "tulip",
+    "fine_label_id": 92,
+    "coarse_label": "flowers",
+    "coarse_label_id": 2
+  },
+  "93": {
+    "fine_label": "turtle",
+    "fine_label_id": 93,
+    "coarse_label": "reptiles",
+    "coarse_label_id": 15
+  },
+  "94": {
+    "fine_label": "wardrobe",
+    "fine_label_id": 94,
+    "coarse_label": "household_furniture",
+    "coarse_label_id": 6
+  },
+  "95": {
+    "fine_label": "whale",
+    "fine_label_id": 95,
+    "coarse_label": "aquatic_mammals",
+    "coarse_label_id": 0
+  },
+  "96": {
+    "fine_label": "willow_tree",
+    "fine_label_id": 96,
+    "coarse_label": "trees",
+    "coarse_label_id": 17
+  },
+  "97": {
+    "fine_label": "wolf",
+    "fine_label_id": 97,
+    "coarse_label": "large_carnivores",
+    "coarse_label_id": 8
+  },
+  "98": {
+    "fine_label": "woman",
+    "fine_label_id": 98,
+    "coarse_label": "people",
+    "coarse_label_id": 14
+  },
+  "99": {
+    "fine_label": "worm",
+    "fine_label_id": 99,
+    "coarse_label": "non-insect_invertebrates",
+    "coarse_label_id": 13
+  }
+}

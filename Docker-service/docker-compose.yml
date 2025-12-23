@@ -1,0 +1,49 @@
+version: '3.9'
+
+services:
+  # Dịch vụ Elasticsearch
+  elasticsearch:
+    image: elasticsearch:8.11.0 # Sử dụng một phiên bản cụ thể
+    container_name: es-lab
+    environment:
+      # Chạy ở chế độ single-node
+      - discovery.type=single-node
+      # Tắt security cho mục đích lab (KHÔNG làm điều này trong production)
+      - xpack.security.enabled=false
+      # Cấp phát 1GB RAM cho Elasticsearch
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+    ports:
+      - "9200:9200" # Port REST API
+      - "9300:9300" # Port giao tiếp nội bộ
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+    networks:
+      - rag_lab_net
+
+  # Dịch vụ Weaviate
+  weaviate:
+    image: semitechnologies/weaviate # Sử dụng một phiên bản cụ thể
+    container_name: weaviate-lab
+    ports:
+      - "8080:8080"  # Port REST API
+      - "50051:50051" # Port gRPC
+    volumes:
+      - weaviate_data:/var/lib/weaviate
+    environment:
+      # Cho phép truy cập không cần xác thực
+      AUTHENTICATION_ANONYMOUS_ENABLED: 'true'
+      # Tắt module vectorizer mặc định (chúng ta sẽ tự quản lý)
+      DEFAULT_VECTORIZER_MODULE: 'none'
+      PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
+      CLUSTER_HOSTNAME: 'localhost'
+    networks:
+      - rag_lab_net
+
+# Định nghĩa volumes để lưu trữ dữ liệu
+volumes:
+  es_data:
+  weaviate_data:
+
+# Định nghĩa network chung
+networks:
+  rag_lab_net:
