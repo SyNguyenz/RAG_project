@@ -1,4 +1,4 @@
-from fastapi import FastAPI, File, UploadFile, HTTPException, Query, Depends
+from fastapi import FastAPI, File, UploadFile, HTTPException, Query, Depends, Form
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
@@ -17,11 +17,22 @@ import os
 from dotenv import load_dotenv
 from contextlib import asynccontextmanager
 from datetime import datetime
+import google.generativeai as genai
+from deep_translator import GoogleTranslator
 
 # ============================================================================
 # Load environments variables
 # ============================================================================
 load_dotenv()
+
+# ============================================================================
+# Config genai
+# ============================================================================
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+if not GEMINI_API_KEY:
+    print("⚠️ Cảnh báo: Chưa có GEMINI_API_KEY trong file .env")
+genai.configure(api_key=GEMINI_API_KEY)
+llm_model = genai.GenerativeModel('gemini-3-flash-preview')
 
 # ============================================================================
 # Pydantic Models
@@ -50,6 +61,7 @@ class SearchResponse(BaseModel):
     total_results: int
     search_time_ms: float
     products: List[ProductResponse]
+    ai_message: str
 
 class HealthResponse(BaseModel):
     """Model cho health check"""
@@ -248,9 +260,22 @@ def extract_image_features(image: Image.Image) -> np.ndarray:
     
     return features.cpu().numpy().flatten()
 
+translator = GoogleTranslator(source='auto', target='en')
+
 def extract_text_features(text: str) -> np.ndarray:
-    """Trích xuất features từ text bằng CLIP"""
-    text_input = clip.tokenize([text]).to(state.device)
+    """Trích xuất features từ text (Có dịch tiếng Việt -> Anh)"""
+    
+    # --- BƯỚC DỊCH TỰ ĐỘNG ---
+    try:
+        # Dịch sang tiếng Anh trước khi đưa vào CLIP
+        text_en = translator.translate(text)
+        print(f"🔤 Dịch: '{text}' -> '{text_en}'") # Log ra để xem
+    except Exception as e:
+        print(f"⚠️ Lỗi dịch thuật: {e}")
+        text_en = text # Nếu lỗi thì dùng tạm text gốc
+    
+    # --- CLIP CHỈ NHẬN TIẾNG ANH ---
+    text_input = clip.tokenize([text_en]).to(state.device)
     
     with torch.no_grad():
         features = state.clip_model.encode_text(text_input)
@@ -285,6 +310,53 @@ def get_products_by_product_ids(conn, product_ids: List[str]) -> List[Dict]:
         
     finally:
         cursor.close()
+
+def normalize_vector(v: np.ndarray) -> np.ndarray:
+    norm = np.linalg.norm(v)
+    if norm == 0: 
+        return v
+    return v / norm
+
+def generate_ai_response(user_query: str, products: List[Dict]):
+    """
+    Hàm này nhận query của user và danh sách sản phẩm tìm được,
+    sau đó gọi Gemini để sinh câu trả lời.
+    """
+    if not GEMINI_API_KEY:
+        return "Hệ thống tư vấn AI đang bảo trì (Thiếu API Key)."
+
+    # 1. Biến danh sách sản phẩm thành text để nhét vào prompt
+    products_text = ""
+    for i, p in enumerate(products[:3]):
+        name = p.product_name if hasattr(p, 'product_name') else p['product_name']
+        price = p.price if hasattr(p, 'price') else p['price']
+        desc = p.description if hasattr(p, 'description') else p['description']
+        
+        products_text += f"{i+1}. {name} - Giá: {price} VND - Mô tả: {desc}\n"
+
+    # 2. Viết Prompt (Kịch bản cho AI)
+    prompt = f"""
+    Bạn là một nhân viên tư vấn thời trang nhiệt tình và chuyên nghiệp.
+    
+    Tình huống:
+    Khách hàng đang tìm kiếm sản phẩm với yêu cầu: "{user_query}"
+    (Nếu khách dùng ảnh, coi như khách đang tìm sản phẩm giống ảnh).
+
+    Hệ thống kho của chúng ta vừa tìm thấy các sản phẩm phù hợp sau:
+    {products_text}
+
+    Nhiệm vụ:
+    Hãy viết một câu tư vấn ngắn (dưới 3 câu), khuyên khách nên chọn sản phẩm nào trong danh sách trên và tại sao. 
+    Văn phong thân thiện, có icon cảm xúc.
+    """
+
+    try:
+        # 3. Gọi Gemini
+        response = llm_model.generate_content(prompt)
+        return response.text
+    except Exception as e:
+        print(f"Lỗi Gemini: {e}")
+        return "Mời bạn tham khảo các sản phẩm bên dưới nhé!"
 
 # ============================================================================
 # FastAPI App
@@ -399,12 +471,16 @@ def search_by_image(
                 ))
         
         search_time = (time.time() - start_time) * 1000
+
+        user_query_context = "Tìm sản phẩm giống hình ảnh này"
+        ai_advice = generate_ai_response(user_query_context, results)
         
         return SearchResponse(
             query_type="image",
             total_results=len(results),
             search_time_ms=search_time,
-            products=results
+            products=results,
+            ai_message=ai_advice
         )
         
     except Exception as e:
@@ -449,16 +525,86 @@ def search_by_text(
                 ))
         
         search_time = (time.time() - start_time) * 1000
-        
+
+        ai_advice = generate_ai_response(query, results)
+
         return SearchResponse(
             query_type="text",
             total_results=len(results),
             search_time_ms=search_time,
-            products=results
+            products=results,
+            ai_message=ai_advice
         )
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing text: {str(e)}")
+    
+@app.post("/search/multimodal", response_model=SearchResponse, tags=["Search"])
+def search_multimodal(
+    file: UploadFile = File(..., description="Ảnh gốc"),
+    text: str = Form(..., description="Text mô tả thêm"),
+    k: int = Form(10),
+    weight: float = Form(0.5, description="Trọng số ảnh (0.0 - 1.0). 0.5 là cân bằng."),
+    conn = Depends(get_db)
+):
+    """
+    Tìm kiếm kết hợp: Vector = (Weight * Image_Vector) + ((1-Weight) * Text_Vector)
+    """
+    import time
+    start_time = time.time()
+
+    try:
+        # 1. Xử lý Ảnh -> Vector
+        contents = file.file.read()
+        image = Image.open(io.BytesIO(contents)).convert('RGB')
+        img_features = extract_image_features(image) # Hàm này đã có trong code cũ của bạn
+        
+        # 2. Xử lý Text -> Vector
+        txt_features = extract_text_features(text)   # Hàm này đã có trong code cũ của bạn
+        
+        # 3. KẾT HỢP VECTOR (Feature Fusion)
+        # Lưu ý: extract_image_features/text trả về numpy array đã flatten
+        
+        # Công thức: V_final = w*V_img + (1-w)*V_txt
+        combined_features = (weight * img_features) + ((1 - weight) * txt_features)
+        
+        # 4. Chuẩn hóa lại vector tổng hợp (Rất quan trọng với Cosine Similarity)
+        combined_features = normalize_vector(combined_features)
+        
+        # 5. Tìm kiếm trong FAISS
+        distances, indices = search_faiss(combined_features, k=k)
+        
+        # 6. Truy vấn DB (Giống hệt các hàm search kia)
+        product_ids = [state.product_ids[int(idx)] for idx in indices if int(idx) < len(state.product_ids)]
+        products = get_products_by_product_ids(conn, product_ids)
+        
+        product_dict = {p['product_id']: p for p in products}
+        results = []
+        
+        for dist, pid in zip(distances, product_ids):
+            if pid in product_dict:
+                product = product_dict[pid]
+                similarity = 1 / (1 + float(dist))
+                results.append(ProductResponse(
+                    **product,
+                    similarity_score=similarity,
+                    distance=float(dist)
+                ))
+
+        search_time = (time.time() - start_time) * 1000
+
+        ai_advice = generate_ai_response(text, results)
+        
+        return SearchResponse(
+            query_type="multimodal",
+            total_results=len(results),
+            search_time_ms=search_time,
+            products=results,
+            ai_message=ai_advice
+        )
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Multimodal search error: {str(e)}")
 
 @app.get("/products/{product_id}", response_model=ProductResponse, tags=["Products"])
 def get_product(product_id: str, conn = Depends(get_db)):
